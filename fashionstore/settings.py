@@ -29,7 +29,7 @@ SECRET_KEY = '^+2r=so0(nxd0&d8tb_36$z$ysm$g^n7)xww%j7swu^8o(dx32'
 DEBUG = False
 
 
-ALLOWED_HOSTS = ['fashionstore-sayooj.herokuapp.com','127.0.0.0']
+ALLOWED_HOSTS = ['fashionstore-sayooj.herokuapp.com','127.0.0.1']
 
 
 # Application definition
