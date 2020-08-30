@@ -28,7 +28,7 @@ SECRET_KEY = '^+2r=so0(nxd0&d8tb_36$z$ysm$g^n7)xww%j7swu^8o(dx32'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fashionstore-sayooj.herokuapp.com','localhost:8000']
 
 
 # Application definition
