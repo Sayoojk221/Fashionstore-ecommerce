@@ -4,4 +4,8 @@ from customer import views
 
 urlpatterns = [
     path('',views.home),
+    path('account/',views.account_user),
+    path('register/',views.user_register),
+    path('emailpasswordcheck/',views.emailpassword),
+    path('login/',views.user_login),
 ]
