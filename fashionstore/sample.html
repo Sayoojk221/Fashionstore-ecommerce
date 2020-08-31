@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+<body>
+    <button style="font-size: 100px" id="btn">click</button>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#btn').click(function(){
+               $('#btn').toggle(8000)
+               $('#btn').hide()
+
+            })
+            $('#btn').mouseenter(function(){
+                $(this).css({'background':'red'})
+            })
+            $('#btn').mouseleave(function(){
+                $(this).css({'background':'white'})
+            })
+        })
+    </script>
+</body>
+</html>

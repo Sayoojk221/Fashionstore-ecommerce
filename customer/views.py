@@ -6,21 +6,45 @@ from django.http import JsonResponse
 def home(request):
     return render(request,'customer/homepage/index.html')
 
+def emailpasswordlogin(request):
+    emailid = request.GET.get('email')
+    password = request.GET.get('password')
+    email_details = register.objects.all().filter(email=emailid)
+    if password:
+        password_deatils = register.objects.all().filter(email=emailid).values_list('password')
+    else:
+        password_deatils=''
+    if not email_details:
+        email_data = f'{emailid} Invalid'
+    else:
+        email_data=''
+
+    if password_deatils:
+        encrypt_code = [i for j in password_deatils for i in j]
+        verify_code = pbkdf2_sha256.verify(password,encrypt_code[0])
+        if verify_code:
+            value=''
+        else:
+            value = ' Password Incorrect '
+    else:
+        value='Email and Password Incorrect'
+
+    info = {'email':email_data,'password':value}
+    return JsonResponse(info)
 def emailpassword(request):
     emailid = request.GET.get('email')
     phone = request.GET.get('phone')
-    print(emailid)
     email_details = register.objects.all().filter(email=emailid)
     phone_details = register.objects.all().filter(phoneno=phone)
     if email_details:
-        email_data = "Emailid Already exist"
+        email_data = "Email Already exist"
     else:
         email_data=''
     if phone_details:
         phone_data = 'Phone Number already exist'
     else:
         phone_data = ''
-    info = {'phone':phone_data,'email':email_data}
+    info = {'phoneno':phone_data,'emailid':email_data}
     return JsonResponse(info)
 
 def send_sms(phone,message):
@@ -43,21 +67,16 @@ def user_register(request):
         phone = request.POST['phone']
         password = request.POST['pass']
         hashpassword = pbkdf2_sha256.encrypt(password,rounds=12000,salt_size=32)
-        email_exist = register.objects.all().filter(email=email)
-        phone_exist = register.objects.all().filter(phoneno=phone)
-        if email_exist:
-            return render(request,'customer/homepage/login.html',{'error':email+' already exist'})
-        elif phone_exist:
-            return render(request,'customer/homepage/login.html',{'error':phone+' already exist'})
-        else:
+        check = register.objects.all().filter(email=email)
+        if not check:
             message = 'This is test message'
             send_sms(phone,message)
             user_details = register(email=email,phoneno=phone,password=hashpassword)
             user_details.save()
 
-            return render(request,'customer/homepage/login.html',{'success':'Successfully Registered'})
+        return render(request,'customer/homepage/index.html',{'success':'Successfully Registered'})
     else:
-        return render(request,'customer/homepage/login.html')
+        return render(request,'customer/homepage/index.html')
 
 def user_login(request):
     if request.method == 'POST':
@@ -65,17 +84,11 @@ def user_login(request):
         password = request.POST['password']
         pass_details = register.objects.all().filter(email=email).values_list('password')
         if pass_details:
-            encryptkey = [i for j in pass_details for i in j]
-            check_password = pbkdf2_sha256.verify(password,encryptkey[0])
-            if check_password:
-                return render(request,'customer/account/index.html')
-            else:
-                return render(request,'customer/homepage/login.html',{'error':'Password Incorrect'})
-
+            return render(request,'customer/account/index.html')
         else:
-            return render(request,'customer/homepage/login.html',{'error':email+' Invalid '})
+            return render(request,'customer/homepage/index.html')
     else:
-        return render(request,'customer/homepage/login.html')
+        return render(request,'customer/homepage/index.html')
 
 def account_user(request):
     return render(request,'customer/account/index.html')
