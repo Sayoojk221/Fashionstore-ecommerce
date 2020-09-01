@@ -17,17 +17,17 @@ def emailpasswordlogin(request):
     if not email_details:
         email_data = f'{emailid} Invalid'
     else:
-        email_data=''
+        email_data=False
 
     if password_deatils:
         encrypt_code = [i for j in password_deatils for i in j]
         verify_code = pbkdf2_sha256.verify(password,encrypt_code[0])
         if verify_code:
-            value=''
+            value=False
         else:
             value = ' Password Incorrect '
     else:
-        value='Email and Password Incorrect'
+        value=False
 
     info = {'email':email_data,'password':value}
     return JsonResponse(info)
@@ -39,11 +39,11 @@ def emailpassword(request):
     if email_details:
         email_data = "Email Already exist"
     else:
-        email_data=''
+        email_data=False
     if phone_details:
         phone_data = 'Phone Number already exist'
     else:
-        phone_data = ''
+        phone_data = False
     info = {'phoneno':phone_data,'emailid':email_data}
     return JsonResponse(info)
 
@@ -67,14 +67,15 @@ def user_register(request):
         phone = request.POST['phone']
         password = request.POST['pass']
         hashpassword = pbkdf2_sha256.encrypt(password,rounds=12000,salt_size=32)
-        check = register.objects.all().filter(email=email)
+        check = register.objects.filter(email=email)
         if not check:
             message = 'This is test message'
             send_sms(phone,message)
-            user_details = register(email=email,phoneno=phone,password=hashpassword)
-            user_details.save()
-
-        return render(request,'customer/homepage/index.html',{'success':'Successfully Registered'})
+            customer_details = register(email=email,phoneno=phone,password=hashpassword)
+            customer_details.save()
+            return render(request,'customer/homepage/index.html')
+        else:
+            return render(request,'customer/homepage/index.html')
     else:
         return render(request,'customer/homepage/index.html')
 
@@ -82,13 +83,13 @@ def user_login(request):
     if request.method == 'POST':
         email = request.POST['emailid']
         password = request.POST['password']
-        pass_details = register.objects.all().filter(email=email).values_list('password')
-        if pass_details:
-            return render(request,'customer/account/index.html')
-        else:
-            return render(request,'customer/homepage/index.html')
+        customer = register.objects.filter(email=email)
+        for item in customer:
+            request.session['customer-id'] = item.id
+        return render(request,'customer/account/index.html')
     else:
         return render(request,'customer/homepage/index.html')
 
 def account_user(request):
     return render(request,'customer/account/index.html')
+

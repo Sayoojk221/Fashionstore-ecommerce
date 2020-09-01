@@ -1,41 +1,28 @@
 $(document).ready(function(){
-    $('#email-reg').change(function(){
+    $('.reg').change(function(){
         var email = $('#email-reg').val()
-        $.ajax({
-            url:'/emailpasswordcheck/',
-            data:{
-                'email':email,
-            },
-            success:function(item){
-                $('#error').html(item.emailid)
-            }
-        });
-    })
-    $('#phone-reg').change(function(){
         var phone = $('#phone-reg').val()
         $.ajax({
             url:'/emailpasswordcheck/',
             data:{
+                'email':email,
                 'phone':phone
             },
             success:function(item){
-                $('#error').html(item.phoneno)
+                if(item.emailid){
+                    $('#error').html(item.emailid)
+                    $('#submit-reg').prop('disabled',true)
+                }else if(item.phoneno){
+                     $('#error').html(item.phoneno)
+                     $('#submit-reg').prop('disabled',true)
+                }else{
+                    $('#error').html('')
+                    $('#submit-reg').prop('disabled',false)
+                }
             }
         });
     })
-    $('#email-log').change(function(){
-        var email = $('#email-log').val()
-        $.ajax({
-            url:'/emailpasswordchecklogin/',
-            data:{
-                'email':email
-            },
-            success:function(item){
-                $('#error').html(item.email)
-            }
-        });
-    })
-    $('#pass-log').change(function(){
+    $('.log').change(function(){
         var pass = $('#pass-log').val()
         var email = $('#email-log').val()
         $.ajax({
@@ -45,7 +32,16 @@ $(document).ready(function(){
                 'password':pass
             },
             success:function(item){
-                $('#error').html(item.password)
+                if(item.email){
+                     $('#error').html(item.email)
+                     $('#submit-log').prop('disabled',true)
+                 }else if(item.password){
+                     $('#error').html(item.password)
+                     $('#submit-log').prop('disabled',true)
+                 }else{
+                    $('#error').html('')
+                    $('#submit-log').prop('disabled',false)
+                 }
             }
         });
     })
