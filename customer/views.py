@@ -14,13 +14,14 @@ def emailpasswordlogin(request):
         password_deatils = register.objects.all().filter(email=emailid).values_list('password')
     else:
         password_deatils=''
+
     if not email_details:
         email_data = f'{emailid} Invalid'
     else:
         email_data=False
 
     if password_deatils:
-        encrypt_code = [i for j in password_deatils for i in j]
+        encrypt_code = [i for j in password_deatils for i in j]         #here converting database value to list format
         verify_code = pbkdf2_sha256.verify(password,encrypt_code[0])
         if verify_code:
             value=False
@@ -31,6 +32,7 @@ def emailpasswordlogin(request):
 
     info = {'email':email_data,'password':value}
     return JsonResponse(info)
+
 def emailpassword(request):
     emailid = request.GET.get('email')
     phone = request.GET.get('phone')
@@ -52,7 +54,7 @@ def send_sms(phone,message):
     querystring = {
         'authorization':'hv02BN1kYVOqyuftJIzEXC7rlDKF5bcRsowWgjxHiPU398MTASaFKDwsVgUdEZcR4Mk5Yql9mAXuvfjS',
         'sender_id':'FSTSMS',
-        'message':message,
+        'message':message,          #fast2sms api used
         'language':'english',
         'route':'p',
         'number':phone
@@ -84,9 +86,12 @@ def user_login(request):
         email = request.POST['emailid']
         password = request.POST['password']
         customer = register.objects.filter(email=email)
-        for item in customer:
-            request.session['customer-id'] = item.id
-        return render(request,'customer/account/index.html')
+        if customer:
+            for item in customer:
+                request.session['customer-id'] = item.id
+            return render(request,'customer/account/index.html')
+        else:
+            return render(request,'customer/homepage/index.html')
     else:
         return render(request,'customer/homepage/index.html')
 

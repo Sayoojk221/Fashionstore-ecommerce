@@ -1,0 +1,63 @@
+{% extends 'admin/dashboard/base.html' %}
+{% block content %}
+<!-- Container Fluid-->
+<div class="container-fluid" id="container-wrapper">
+  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800"></h1>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
+      <li class="breadcrumb-item">Product</li>
+      <li class="breadcrumb-item active" aria-current="page">New Item</li>
+      <li class="breadcrumb-item active" aria-current="page">Common</li>
+    </ol>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <!-- Form Basic -->
+      <div class="card mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+          <h6 class="m-0 font-weight-bold text-primary">Common Details</h6>
+        </div>
+        <div class="card-body">
+          <form>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Product Name:</label>
+              <input type="text" class="form-control"
+                >
+            </div>
+            <fieldset class="form-group">
+              <div class="row">
+                <legend class="col-form-label col-sm-3 pt-0">Gender:</legend>
+                <div class="col-sm-9">
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio1" name="gender" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio1">Men</label>
+                  </div>
+                  <div class="custom-control custom-radio">
+                    <input type="radio" id="customRadio2" name="gender" class="custom-control-input">
+                    <label class="custom-control-label" for="customRadio2">Women</label>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Description</label>
+              <textarea class="form-control" id="desc" name='desc' rows="3">
+              <div class="editable" contenteditable="true">
+                <ul>
+                    <li>List item</li>
+                    <li>List item</li>
+                </ul>
+            </div></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!---Container Fluid-->
+</div>
+{% endblock %}
