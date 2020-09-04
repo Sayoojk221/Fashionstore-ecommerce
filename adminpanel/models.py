@@ -9,8 +9,8 @@ class ProductCommon(models.Model):
     productid = models.CharField(max_length=200,default='')
     title = models.CharField(max_length=200,default='')
     gender = models.CharField(max_length=200,default='')
-    description = models.CharField(max_length=1000,default='')
-    additionaldescription = models.CharField(max_length=2000,default='')
+    productdetail = models.CharField(max_length=1000,default='')
+    stylenote = models.CharField(max_length=2000,default='')
     shippingandreturns = models.CharField(max_length=500,default='')
     createddate = models.DateTimeField(default=timezone.now)
 
