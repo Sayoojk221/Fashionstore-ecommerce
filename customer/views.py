@@ -3,8 +3,37 @@ from .models import *
 import requests
 from passlib.hash import pbkdf2_sha256
 from django.http import JsonResponse
+from .decorator import *
+from adminpanel.models import *
+
+
+def outofstock():
+    value = ProductSize.objects.filter(quantity='0').values_list('productcolor__productcommon__productid')
+    if value:
+        totalid = [i for j in value for i in j]             #first filtering zero coloumn in size table.if have any zero
+        out_of_stock = []                                   #row exist , get productid of that row. then check total count of each productid
+        for id in totalid:                                  #contain in totalid variable and again check count size created by that productid
+            if id not in out_of_stock:                      #if any productid have equel count in both count and totalsize variable.that productid will add to outofstock list
+                count = totalid.count(id)
+                totalsize = ProductSize.objects.filter(productcolor__productcommon__productid=id).count()
+                if count == totalsize:
+                    out_of_stock.append(id)
+                else:
+                    pass
+        return out_of_stock
+    else:
+        out_of_stock = []
+        return out_of_stock
+
+
 def home(request):
-    return render(request,'customer/homepage/index.html')
+    allcloths = ProductLists.objects.all()
+    productcolor = ProductColor.objects.all()
+    stock = outofstock()
+    value = ProductSize.objects.all().values_list('productcolor')
+    colorsize = [i for j in value for i in j]
+    context = {'cloths':allcloths,'stock':stock,'color':productcolor,'colorsize':colorsize}
+    return render(request,'customer/homepage/index.html',context)
 
 def emailpasswordlogin(request):
     emailid = request.GET.get('email')
@@ -89,12 +118,56 @@ def user_login(request):
         if customer:
             for item in customer:
                 request.session['customer-id'] = item.id
-            return render(request,'customer/account/index.html')
+            return redirect('/account/')
         else:
             return render(request,'customer/homepage/index.html')
     else:
         return render(request,'customer/homepage/index.html')
 
+@customerauthentication
 def account_user(request):
-    return render(request,'customer/account/index.html')
+    allcloths = ProductLists.objects.all()
+    productcolor = ProductColor.objects.all()
+    stock = outofstock()
+    value = ProductSize.objects.all().values_list('productcolor')
+    colorsize = [i for j in value for i in j]
+    context = {'cloths':allcloths,'stock':stock,'color':productcolor,'colorsize':colorsize}
+    return render(request,'customer/account/index.html',context)
 
+def product_single(request):
+    productid = request.GET.get('id')
+    colorid = request.GET.get('id2')
+    totalcolors = ProductColor.objects.all()
+    totalsize = ProductSize.objects.all().order_by('-size')
+    value = ProductSize.objects.all().values_list('productcolor')
+    colorsize = [i for j in value for i in j]
+    if productid:
+        value = ProductLists.objects.filter(productid=productid).values_list('id')
+        id = [i for j in value for i in j]
+        productdetails = ProductLists.objects.get(id=id[0])
+        product_details = ProductSize.objects.filter(productcolor__productcommon__productid=productid,size=productdetails.productfulldetails.size)
+
+    elif colorid:
+        product_details = ProductSize.objects.filter(productcolor__colorid=colorid)
+
+    context = {'pro_Details':product_details,'size':totalsize,'color':totalcolors,'colorsize':colorsize}
+    return render(request,'customer/homepage/productsingle.html',context)
+
+def product_single_useraccount(request):
+    productid = request.GET.get('id')
+    colorid = request.GET.get('id2')
+    totalcolors = ProductColor.objects.all()
+    totalsize = ProductSize.objects.all().order_by('-size')
+    value = ProductSize.objects.all().values_list('productcolor')
+    colorsize = [i for j in value for i in j]
+    if productid:
+        value = ProductLists.objects.filter(productid=productid).values_list('id')
+        id = [i for j in value for i in j]
+        productdetails = ProductLists.objects.get(id=id[0])
+        product_details = ProductSize.objects.filter(productcolor__productcommon__productid=productid,size=productdetails.productfulldetails.size)
+
+    elif colorid:
+        product_details = ProductSize.objects.filter(productcolor__colorid=colorid)
+
+    context = {'pro_Details':product_details,'size':totalsize,'color':totalcolors,'colorsize':colorsize}
+    return render(request,'customer/account/productsingle.html',context)

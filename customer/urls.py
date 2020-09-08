@@ -9,4 +9,6 @@ urlpatterns = [
     path('emailpasswordcheck/',views.emailpassword),
     path('emailpasswordchecklogin/',views.emailpasswordlogin),
     path('login/',views.user_login),
+    path('productsingle/',views.product_single),
+    path('productsingleuseraccount/',views.product_single_useraccount),
 ]

@@ -17,6 +17,7 @@ class ProductCommon(models.Model):
 class ProductColor(models.Model):
     productcommon = models.ForeignKey(ProductCommon,on_delete=models.CASCADE)
     colorid = models.CharField(max_length=200,default='')
+    productpicture = models.ImageField(upload_to='product',default='')
     picture = models.ImageField(upload_to='product',default='')
     picture2 = models.ImageField(upload_to='product',default='')
     picture3 = models.ImageField(upload_to='product',default='')
@@ -28,3 +29,10 @@ class ProductSize(models.Model):
     size = models.CharField(max_length=200,default='')
     quantity = models.CharField(max_length=200,default='')
     price = models.CharField(max_length=200,default='')
+
+    def __str__(self):
+       return self.productcolor.productcommon.title
+
+class ProductLists(models.Model):
+     productfulldetails = models.ForeignKey(ProductSize,on_delete=models.CASCADE)
+     productid = models.CharField(max_length=200,default='')

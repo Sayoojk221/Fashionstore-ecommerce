@@ -1,2 +1,4 @@
 media/
 __pycache__/
+customer/__pycache__
+fashinstore/__pycache__

@@ -37,9 +37,10 @@
           <h6 class="m-0 font-weight-bold text-primary">Product Color and Suitable Pictures</h6>
         </div>
         <div class="card-body">
-          <form method='POST' action="/admin/color/"  enctype='multipart/form-data'>
+          <form method='POST' action="/admin/color/" id='colorform'  enctype='multipart/form-data'>
             {% csrf_token%}
-            <div class="input-group mb-3">
+<!--             <input type='hidden' id='csrf' name='csrfmiddlewaretoken' value='{{csrf_token }}' />
+ -->            <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">Product Id:</span>
                 </div>
@@ -52,28 +53,37 @@
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text">Picture</span>
+                  <span class="input-group-text">Product Picture</span>
                 </div>
                 <div class="custom-file">
-                    <input required type="file" name='pic' class="custom-file-input" id="customFile">
+                    <input required type="file" name='propic' class="custom-file-input" id="propic">
+                    <label class="custom-file-label " for="customFile">Choose file</label>
+                  </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Front view</span>
+                </div>
+                <div class="custom-file">
+                    <input required type="file" name='pic' class="custom-file-input photo" id="customFile">
                     <label class="custom-file-label" for="customFile">Choose file</label>
                   </div>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text">Picture 2</span>
+                  <span class="input-group-text">Back view</span>
                 </div>
                 <div class="custom-file">
-                    <input required type="file" name='pic2' class="custom-file-input" id="customFile">
+                    <input required type="file" name='pic2' class="custom-file-input photo" id="customFile">
                     <label class="custom-file-label" for="customFile">Choose file</label>
                   </div>
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                  <span class="input-group-text">Picture 3</span>
+                  <span class="input-group-text">Side View</span>
                 </div>
                 <div class="custom-file">
-                    <input required type="file" name='pic3' class="custom-file-input" id="customFile">
+                    <input required type="file" name='pic3' class="custom-file-input photo" id="customFile">
                     <label class="custom-file-label" for="customFile">Choose file</label>
                   </div>
             </div>
@@ -92,4 +102,5 @@
 </div>
 <!---Container Fluid-->
 </div>
+
 {% endblock %}

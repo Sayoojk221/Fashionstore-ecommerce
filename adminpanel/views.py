@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from .decorator import *
 from django.urls import reverse
 import urllib
+import json
 
 def emailpass_check(request):
     email = request.GET.get('email')
@@ -14,7 +15,6 @@ def emailpass_check(request):
     if check:
         email_data = ''
         encrypt_code = [i for j in check for i in j]
-        print(encrypt_code[0])
         verify_key = pbkdf2_sha256.verify(password,encrypt_code[0])
         if verify_key:
             password_data = ''
@@ -78,7 +78,6 @@ def product_common(request):
             if last_productid:
                 id2 = last_productid.productid
                 value = id2[3:]
-                print(value)
             else:
                 value = 1000
             id1 = int(value)+1
@@ -98,15 +97,17 @@ def product_color(request):
     totalproduct = ProductCommon.objects.all()
     if request.method == 'POST':
         mainid = request.POST['id']         #this id created by database.its used for  add foreign key of this product
+        propic = request.FILES['propic']
         pic = request.FILES['pic']
         pic2 = request.FILES['pic2']
         pic3 = request.FILES['pic3']
         color = request.POST['color']
+        print(pic)
         check = ProductColor.objects.filter(productcommon=mainid,color=color)
         if not check:
             foriegndata = ProductCommon.objects.get(id=mainid)
             colorid = f'{foriegndata.productid}/{color}'
-            color_details = ProductColor(productcommon=foriegndata,colorid=colorid,picture=pic,picture2=pic2,picture3=pic3,color=color)
+            color_details = ProductColor(productpicture=propic,productcommon=foriegndata,colorid=colorid,picture=pic,picture2=pic2,picture3=pic3,color=color)
             color_details.save()
             context = {'products':totalproduct,'colorid':colorid,'color':color}
             return render(request,'admin/dashboard/productcolor.html',context)
@@ -126,14 +127,24 @@ def product_size(request):
         size = request.POST['size']             #its used determine which product is want to add different size with price,quntity
         quty = request.POST['qunty']
         price = request.POST['price']
-        check = ProductSize.objects.filter(productcolor=mainid,size=size,quantity=quty,price=price)
+        check = ProductSize.objects.filter(productcolor=mainid,size=size)
         if not check:
             value = ProductColor.objects.get(id=mainid)
             sizeid = f'{value.colorid}/{size}'
             size_deatils = ProductSize(productcolor=value,size=size,quantity=quty,price=price,sizeid=sizeid)
             size_deatils.save()
             context = {'products':totalproduct,'sizeid':sizeid}
-            return render(request,'admin/dashboard/productsize.html',context)
+            productid = value.productcommon.productid
+            check_productid = ProductLists.objects.filter(productid=productid)
+            if not check_productid:
+                value = ProductSize.objects.filter(productcolor=value,size=size,quantity=quty,price=price,sizeid=sizeid).values_list('id')
+                sizeid = [i for j in value for i in j]                                                     #In this condition adding product on Productlists table.if the productid already
+                fulldetails = ProductSize.objects.get(id=sizeid[0])                                           #exist in that table its not store . so that way we can add different color and also add different size of same product
+                list_details = ProductLists(productfulldetails=fulldetails,productid=productid)            #In home page only have one product . but inside that product have necessary colors and size
+                list_details.save()
+                return render(request,'admin/dashboard/productsize.html',context)
+            else:
+                return render(request,'admin/dashboard/productsize.html',context)
         else:
             context = {'products':totalproduct,'exist':True}
             return render(request,'admin/dashboard/productsize.html',context)
@@ -144,3 +155,6 @@ def product_size(request):
 def logout(request):
     del request.session['admin-id']
     return redirect('/')
+
+
+

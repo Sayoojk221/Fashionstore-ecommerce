@@ -9,4 +9,5 @@ urlpatterns = [
     path('common/',views.product_common),
     path('color/',views.product_color),
     path('size/',views.product_size),
+    # path('photocheck/',views.photo_check),
 ]

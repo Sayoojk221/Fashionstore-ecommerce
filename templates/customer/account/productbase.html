@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Fashionstore</title>
     <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="description" content="Fashionstore - Bootstrap eCommerce Template">
     <meta name="author" content="p-themes">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/static/assets/images/icons/apple-touch.png">
@@ -16,9 +16,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/icons/favicon-16.png">
     <link rel="manifest" href="/static/assets/images/icons/site.html">
     <link rel="mask-icon" href="/static/assets/images/icons/safari-pinned-tab.svg" color="#666666">
-    <link rel="shortcut icon" href="/static/assets/images/icons/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="Molla">
-    <meta name="application-name" content="Molla">
+    <link rel="shortcut icon" href="/static/assets/images/icons/favico.ico">
+    <meta name="apple-mobile-web-app-title" content="Fashionstore">
+    <meta name="application-name" content="Fashionstore">
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="/static/assets/images/icons/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">
@@ -27,11 +27,9 @@
     <link rel="stylesheet" href="/static/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/assets/css/plugins/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="/static/assets/css/plugins/magnific-popup/magnific-popup.css">
-    <link rel="stylesheet" href="/static/assets/css/plugins/jquery.countdown.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="/static/assets/css/style.css">
-    <link rel="stylesheet" href="/static/assets/css/skins/skin-demo-6.css">
-    <link rel="stylesheet" href="/static/assets/css/demos/demo-6.css">
+    <link rel="stylesheet" href="/static/assets/css/plugins/nouislider/nouislider.css">
 </head>
 
 <body>
@@ -105,11 +103,34 @@
                     </div>
                     <div class="header-center">
                         <a href="index.html" class="logo">
-                            <img src="/static/assets/images/demos/logo.png" alt="Molla Logo" width="200" height="20">
+                            <img src="/static/assets/images/demos/logo.png" alt="Fashionstore Logo" width="200" height="20">
                         </a>
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
+                        <!-- <div class="dropdown compare-dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Compare Products" aria-label="Compare Products">
+                                <i class="icon-random"></i>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <ul class="compare-products">
+                                    <li class="compare-product">
+                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                        <h4 class="compare-product-title"><a href="product.html">Blue Night Dress</a></h4>
+                                    </li>
+                                    <li class="compare-product">
+                                        <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+                                        <h4 class="compare-product-title"><a href="product.html">White Long Skirt</a></h4>
+                                    </li>
+                                </ul>
+
+                                <div class="compare-actions">
+                                    <a href="#" class="action-link">Clear All</a>
+                                    <a href="#" class="btn btn-outline-primary-2"><span>Compare</span><i class="icon-long-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div> -->
                         <a href="wishlist.html" class="wishlist-link">
                             <!-- <i class="icon-heart-o"></i>
                             <span class="wishlist-count">3</span>
@@ -188,15 +209,15 @@
                         <nav class="main-nav">
                             <ul class="menu ">
                                 <li class="megamenu-container">
-                                    <a href="/account/" class="sf">Home</a>
+                                    <a href="/"  class="sf">Home</a>
                                 <li>
-                                    <a href="#" class="sf">Shop</a>
+                                    <a href="#"  class="sf">Shop</a>
                                 </li>
                                 <!-- <li>
                                     <a href="#" class="sf">Product</a>
                                 </li> -->
                                 <li>
-                                    <a href="#" class="sf">Blog</a>
+                                    <a href="#"  class="sf">Blog</a>
                                 </li>
                             </ul><!-- End .menu -->
                         </nav><!-- End .main-nav -->
@@ -238,8 +259,8 @@
                                 <h4 class="widget-title">Useful Links</h4><!-- End .widget-title -->
 
                                 <ul class="widget-list">
-                                    <li><a href="#">About Molla</a></li>
-                                    <li><a href="#">How to shop on Molla</a></li>
+                                    <li><a href="#">About Fashionstore</a></li>
+                                    <li><a href="#">How to shop on Fashionstore</a></li>
                                     <li><a href="#">FAQ</a></li>
                                     <li><a href="#">Contact us</a></li>
                                 </ul><!-- End .widget-list -->
@@ -260,7 +281,6 @@
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
                         </div><!-- End .col-sm-6 col-lg-3 -->
-
                         <div class="col-sm-6 col-lg-3">
                             <div class="widget">
                                 <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
@@ -273,6 +293,7 @@
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
                         </div><!-- End .col-sm-6 col-lg-3 -->
+                        <!-- End .col-sm-6 col-lg-3 -->
                     </div><!-- End .row -->
                 </div><!-- End .container -->
             </div><!-- End .footer-middle -->
@@ -282,14 +303,44 @@
                     <figure class="footer-payments">
                         <img src="/static/assets/images/payments.png" alt="Payment methods" width="272" height="20">
                     </figure><!-- End .footer-payments -->
-                    <img src="/static/assets/images/demos/logo-footer.png" alt="Molla Logo" width="200" height="20">
-                    <p class="footer-copyright">Copyright © 2020 Fashion store. All Rights Reserved.</p><!-- End .footer-copyright -->
+                    <img src="/static/assets/images/demos/logo-footer.png" alt="Fashionstore Logo" width="200" height="20">
+                    <p class="footer-copyright">Copyright © 2020 Fashionstore Store. All Rights Reserved.</p><!-- End .footer-copyright -->
                 </div><!-- End .container -->
             </div><!-- End .footer-bottom -->
         </footer><!-- End .footer -->
     </div><!-- End .page-wrapper -->
     <button id="scroll-top" title="Back to Top"><i class="icon-arrow-up"></i></button>
+    <!-- Sticky Bar -->
+    {% for item in pro_Details%}
+    <div class="sticky-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <figure class="product-media">
+                        <a>
+                            <img src="{{item.productcolor.picture.url}}" alt="Product image">
+                        </a>
+                    </figure><!-- End .product-media -->
+                    <h4 class="product-title"><a >{{item.productcolor.productcommon.title}}</a></h4><!-- End .product-title -->
+                </div><!-- End .col-6 -->
 
+                <div class="col-6 justify-content-end">
+                    <div class="product-price">
+                        ${{item.price}}
+                    </div><!-- End .product-price -->
+                    <div class="product-details-quantity">
+<!--                         <input type="number" id="sticky-cart-qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+ -->                    </div><!-- End .product-details-quantity -->
+
+                    <div class="product-details-action">
+                        <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                        <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                    </div><!-- End .product-details-action -->
+                </div><!-- End .col-6 -->
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+    </div><!-- End .sticky-bar -->
+    {% endfor %}
     <!-- Mobile Menu -->
     <div class="mobile-menu-overlay"></div><!-- End .mobil-menu-overlay -->
 
@@ -305,8 +356,8 @@
 
             <nav class="mobile-nav">
                 <ul class="mobile-menu">
-                    <li class="active">
-                        <a href="/account/">Home</a>
+                    <li class="">
+                        <a href="/">Home</a>
 
 
                     </li>
@@ -335,8 +386,8 @@
             </div><!-- End .social-icons -->
         </div><!-- End .mobile-menu-wrapper -->
     </div><!-- End .mobile-menu-container -->
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src='/static/assets/js/emailpasswordcheck.js'></script>
     <script src="/static/assets/js/jquery.min.js"></script>
     <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/static/assets/js/jquery.hoverIntent.min.js"></script>
@@ -344,12 +395,11 @@
     <script src="/static/assets/js/superfish.min.js"></script>
     <script src="/static/assets/js/owl.carousel.min.js"></script>
     <script src="/static/assets/js/bootstrap-input-spinner.js"></script>
-    <script src="/static/assets/js/jquery.plugin.min.js"></script>
+    <script src="/static/assets/js/jquery.elevateZoom.min.js"></script>
+    <script src="/static/assets/js/bootstrap-input-spinner.js"></script>
     <script src="/static/assets/js/jquery.magnific-popup.min.js"></script>
-    <script src="/static/assets/js/jquery.countdown.min.js"></script>
     <!-- Main JS File -->
     <script src="/static/assets/js/main.js"></script>
-    <script src="/static/assets/js/demos/demo-6.js"></script>
 </body>
 
 
