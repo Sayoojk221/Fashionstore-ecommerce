@@ -11,4 +11,8 @@ urlpatterns = [
     path('login/',views.user_login),
     path('productsingle/',views.product_single),
     path('productsingleuseraccount/',views.product_single_useraccount),
+    path('customersmacid/',views.customersmacid),
+    path('addtocart/',views.addtocart),
+    path('sidecart/',views.sidecart),
+
 ]
