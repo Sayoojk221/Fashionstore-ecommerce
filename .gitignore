@@ -1,4 +1,7 @@
-media/
-__pycache__/
-customer/__pycache__
-fashinstore/__pycache__
+/media/product/
+/customer/__pycache__/
+/adminpanel/__pycache__/
+/fashionstore/__pycache__/
+/customer/migrations/
+/adminpanel/migrations/
+/fashionstore/migrations/

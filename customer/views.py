@@ -5,6 +5,35 @@ from passlib.hash import pbkdf2_sha256
 from django.http import JsonResponse
 from .decorator import *
 from adminpanel.models import *
+import uuid
+from django.core.serializers import serialize
+import json
+
+def customersmacid(request):
+    macid = hex(uuid.getnode())
+    value = CustomersUniqueId.objects.all().values_list('encryptedid')
+    idencrypt = [i for j in value for i in j]
+    if idencrypt:
+        for item in idencrypt:
+            verify = pbkdf2_sha256.verify(macid,item)
+            if verify:
+                idexist = True
+            else:
+                idexist = False
+        if idexist:
+            return JsonResponse({'status':'Failed'})
+        else:
+            encryt_code = pbkdf2_sha256.encrypt(macid,rounds=12000,salt_size=32)
+            CustomersUniqueId.objects.create(encryptedid=encryt_code)
+            request.session['unique-id']=encryt_code
+            return JsonResponse({'status':'Success'})
+
+    else:
+        encryt_code = pbkdf2_sha256.encrypt(macid,rounds=12000,salt_size=32)
+        request.session['unique-id']=encryt_code
+        CustomersUniqueId.objects.create(encryptedid=encryt_code)
+        return JsonResponse({'status':'Success'})
+
 
 
 def outofstock():
@@ -38,16 +67,19 @@ def home(request):
 def emailpasswordlogin(request):
     emailid = request.GET.get('email')
     password = request.GET.get('password')
-    email_details = register.objects.all().filter(email=emailid)
+    email_details = register.objects.filter(email=emailid)
     if password:
-        password_deatils = register.objects.all().filter(email=emailid).values_list('password')
+        password_deatils = register.objects.filter(email=emailid).values_list('password')
     else:
         password_deatils=''
 
-    if not email_details:
-        email_data = f'{emailid} Invalid'
+    if email_details:
+        email_data = False
     else:
-        email_data=False
+        if emailid:
+            email_data=f'{emailid} email Invalid'
+        else:
+            email_data = ''
 
     if password_deatils:
         encrypt_code = [i for j in password_deatils for i in j]         #here converting database value to list format
@@ -65,8 +97,8 @@ def emailpasswordlogin(request):
 def emailpassword(request):
     emailid = request.GET.get('email')
     phone = request.GET.get('phone')
-    email_details = register.objects.all().filter(email=emailid)
-    phone_details = register.objects.all().filter(phoneno=phone)
+    email_details = register.objects.filter(email=emailid)
+    phone_details = register.objects.filter(phoneno=phone)
     if email_details:
         email_data = "Email Already exist"
     else:
@@ -102,8 +134,7 @@ def user_register(request):
         if not check:
             message = 'This is test message'
             send_sms(phone,message)
-            customer_details = register(email=email,phoneno=phone,password=hashpassword)
-            customer_details.save()
+            register.objects.create(email=email,phoneno=phone,password=hashpassword)
             return render(request,'customer/homepage/index.html')
         else:
             return render(request,'customer/homepage/index.html')
@@ -171,3 +202,73 @@ def product_single_useraccount(request):
 
     context = {'pro_Details':product_details,'size':totalsize,'color':totalcolors,'colorsize':colorsize}
     return render(request,'customer/account/productsingle.html',context)
+
+# def ipencryptedvalue(ip):
+
+
+
+
+
+def addtocart(request):
+    macid = hex(uuid.getnode())
+    sizeid = request.GET.get('id')
+    value = CustomersUniqueId.objects.all().values_list('encryptedid')
+    idencrypt = [i for j in value for i in j]
+    for item in idencrypt:
+        verify = pbkdf2_sha256.verify(macid,item)
+        if verify:
+            checkproduct = CartList.objects.filter(productid=sizeid,encryptedid=item)
+            if checkproduct:
+                return JsonResponse({'status':'item already in cart'})
+            else:
+                size_details = ProductSize.objects.get(id=sizeid)
+                CartList.objects.create(productid=size_details,encryptedid=item)
+                return JsonResponse({'status':'item added'})
+
+
+def uniquecode(macid):
+    value = CustomersUniqueId.objects.all().values_list('encryptedid')
+    encryptedids = [i for j in value for i in j]
+    if encryptedids:
+        for item in encryptedids:
+            verify = pbkdf2_sha256.verify(str(macid),item)
+            if verify:
+                code = item
+                return code
+    else:
+        return False
+
+
+def sidecart(request):
+    macid = hex(uuid.getnode())
+    code = uniquecode(macid)
+    if code:
+        cartlists = CartList.objects.filter(encryptedid=code)
+        if cartlists:
+            productcount = CartList.objects.filter(encryptedid=code).count()
+            value = CartList.objects.filter(encryptedid=code).values_list('productid__price')
+            pricelist = [i for j in value for i in j]
+            totalprice = 0
+            for price in pricelist:
+                totalprice += int(price)
+
+            value2 = CartList.objects.filter(encryptedid=code).values_list('productid')
+            idlist = [i for j in value2 for i in j]
+            totallists = []
+            for item in idlist:
+                productdetails = ProductSize.objects.get(id=item)
+                productlist = {}
+                productlist['name'] = productdetails.productcolor.productcommon.title
+                productlist['link'] = productdetails.productcolor.picture.url
+                productlist['price'] = productdetails.price
+                productlist['productid'] = productdetails.productcolor.colorid
+                productlist['size'] = productdetails.size
+                totallists.append(productlist)
+            print(totallists)
+            info = {'lists':totallists,'count':productcount,'price':totalprice}
+            return JsonResponse(info)
+        else:
+            return JsonResponse({'info':'Cart Empty'})
+    else:
+        return JsonResponse({'info':'Cart Empty'})
+

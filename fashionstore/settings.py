@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'adminpanel',
     'customer',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -147,3 +148,15 @@ MEDIA_URL = '/media/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
+
+AWS_ACCESS_KEY_ID = 'AKIAQ2UK2UQDUJUVRMWM'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'fashionhub-media'
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+MEDIAFILES_LOCATION = 'media'
+DEFAULT_FILE_STORAGE = 'fashionstore.storage_backends.MediaStorage'
