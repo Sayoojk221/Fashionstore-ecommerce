@@ -45,4 +45,24 @@ $(document).ready(function(){
             }
         });
     })
+    $('#oldpass').on('change',function(){
+        var pass = $(this).val()
+        $.ajax({
+            url:'/oldpassconfirm/',
+            data:{'pass':pass},
+            success:function(data){
+                if(data.info){
+                    $('#error2').html(data.info)
+                    $('#submit-pass').prop('disabled',true)
+
+                }else{
+                    $('#error2').html('')
+                    $('#submit-pass').prop('disabled',false)
+                }
+            }
+        })
+    })
+
+
+
 })

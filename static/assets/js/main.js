@@ -56,6 +56,12 @@ $(document).ready(function () {
 		});
 	}
 
+    // $('.sidebar-filter-clear').on('click', function (e) {
+    //     $('.sidebar-shop').find('input').prop('checked', false);
+
+    //     e.preventDefault();
+    // });
+
     // Menu init with superfish plugin
     if ( $.fn.superfish ) {
         $('.menu, .menu-vertical').superfish({
@@ -126,11 +132,11 @@ $(document).ready(function () {
     });
 
     // Clear All checkbox/remove filters in sidebar filter
-    $('.sidebar-filter-clear').on('click', function (e) {
-    	$('.sidebar-shop').find('input').prop('checked', false);
+    // $('.sidebar-filter-clear1').on('click', function (e) {
+    // 	$('.sidebar-shop').find('input').prop('checked', false);
 
-    	e.preventDefault();
-    });
+    // 	e.preventDefault();
+    // });
 
     // Popup - Iframe Video - Map etc.
     if ( $.fn.magnificPopup ) {
@@ -779,4 +785,5 @@ $(document).ready(function () {
             }, 500)
         }, 10000)
     }
+
 });

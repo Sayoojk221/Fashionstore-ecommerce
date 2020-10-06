@@ -8,6 +8,8 @@ class Register(models.Model):
 class ProductCommon(models.Model):
     productid = models.CharField(max_length=200,default='')
     title = models.CharField(max_length=200,default='')
+    category = models.CharField(max_length=200,default='')
+    brand = models.CharField(max_length=200,default='')
     gender = models.CharField(max_length=200,default='')
     productdetail = models.CharField(max_length=1000,default='')
     stylenote = models.CharField(max_length=2000,default='')
@@ -27,12 +29,16 @@ class ProductSize(models.Model):
     productcolor = models.ForeignKey(ProductColor,on_delete=models.CASCADE)
     sizeid = models.CharField(max_length=200,default='')
     size = models.CharField(max_length=200,default='')
-    quantity = models.CharField(max_length=200,default='')
-    price = models.CharField(max_length=200,default='')
+    quantity = models.IntegerField()
+    price = models.IntegerField()
 
-    def __str__(self):
-       return self.productcolor.productcommon.title
+    class Meta:
+        get_latest_by = ['productcolor__colorid']
 
 class ProductLists(models.Model):
      productfulldetails = models.ForeignKey(ProductSize,on_delete=models.CASCADE)
      productid = models.CharField(max_length=200,default='')
+
+     def __str__(self):
+        return self.productfulldetails.productcolor.productcommon.category
+

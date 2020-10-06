@@ -16,7 +16,7 @@
                             <h3 class="intro-subtitle text-white">You're Looking Good</h3><!-- End .h3 intro-subtitle -->
                             <h1 class="intro-title text-white">New Lookbook</h1><!-- End .intro-title -->
 
-                            <a href="category.html" class="btn btn-outline-white-4">
+                            <a href="/category/" class="btn btn-outline-white-4">
                                 <span>Discover More</span>
                             </a>
                         </div><!-- End .intro-content -->
@@ -27,7 +27,7 @@
                             <h3 class="intro-subtitle text-white">Don’t Miss</h3><!-- End .h3 intro-subtitle -->
                             <h1 class="intro-title text-white">Mysrety Deals</h1><!-- End .intro-title -->
 
-                            <a href="category.html" class="btn btn-outline-white-4">
+                            <a href="/category/" class="btn btn-outline-white-4">
                                 <span>Discover More</span>
                             </a>
                         </div><!-- End .intro-content -->
@@ -42,28 +42,28 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="banner banner-overlay">
-                                <a href="#">
+                                <a href="/filter/all/women&/all/all/,0,750/">
                                     <img src="/static/assets/images/demos/demo-6/banners/banner-1.jpg" alt="Banner">
                                 </a>
 
                                 <div class="banner-content banner-content-center">
                                     <h4 class="banner-subtitle text-white"><a href="#">New in</a></h4><!-- End .banner-subtitle -->
                                     <h3 class="banner-title text-white"><a href="#"><strong>Women’s</strong></h3><!-- End .banner-title -->
-                                    <a href="#" class="btn btn-outline-white banner-link underline">Shop Now</a>
+                                    <a href="/filter/all/women&/all/all/,0,750/" class="btn btn-outline-white banner-link underline">Shop Now</a>
                                 </div><!-- End .banner-content -->
                             </div><!-- End .banner -->
                         </div><!-- End .col-sm-6 -->
 
                         <div class="col-sm-6">
                             <div class="banner banner-overlay">
-                                <a href="#">
+                                <a href="/filter/all/men&/all/all/,0,750/">
                                     <img src="/static/assets/images/demos/demo-6/banners/banner-2.jpg" alt="Banner">
                                 </a>
 
                                 <div class="banner-content banner-content-center">
                                     <h4 class="banner-subtitle text-white"><a href="#">New in</a></h4><!-- End .banner-subtitle -->
                                     <h3 class="banner-title text-white"><a href="#"><strong>Men’s</strong></a></h3><!-- End .banner-title -->
-                                    <a href="#" class="btn btn-outline-white banner-link underline">Shop Now</a>
+                                    <a href="/filter/all/men&/all/all/,0,750/" class="btn btn-outline-white banner-link underline">Shop Now</a>
                                 </div><!-- End .banner-content -->
                             </div><!-- End .banner -->
                         </div><!-- End .col-sm-6 -->
@@ -122,7 +122,7 @@
                             {% if item.productfulldetails.productcolor.productcommon.productid not in stock %}
                             <div class="product product-7 text-center">
                                 <figure class="product-media">
-                                    <a href="/productsingle/?id={{item.productfulldetails.productcolor.productcommon.productid}}">
+                                    <a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">
                                         <img src="{{item.productfulldetails.productcolor.productpicture.url}}" alt="Product image" width="277" height="377" class="product-image">
                                         <img src="{{item.productfulldetails.productcolor.picture.url}}" alt="Product image" width="277" height="377" class="product-image-hover">
                                     </a>
@@ -139,7 +139,7 @@
                                     <div class="product-cat">
                                         <a>Clothing</a>
                                     </div>
-                                    <h3 class="product-title"><a href="/productsingle/?id={{item.productfulldetails.productcolor.productcommon.productid}}">{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
+                                    <h3 class="product-title"><a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
                                     <div class="product-price">
                                         ${{item.productfulldetails.price}}
                                     </div><!-- End .product-price -->
@@ -232,7 +232,7 @@
                             {% if item.productfulldetails.productcolor.productcommon.productid not in stock %}
                             <div class="product product-7 text-center">
                                 <figure class="product-media">
-                                    <a href="/productsingle/?id={{item.productfulldetails.productcolor.productcommon.productid}}">
+                                    <a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">
                                         <img src="{{item.productfulldetails.productcolor.productpicture.url}}" alt="Product image" width="277" height="377" class="product-image">
                                         <img src="{{item.productfulldetails.productcolor.picture.url}}" alt="Product image" width="277" height="377" class="product-image-hover">
                                     </a>
@@ -250,7 +250,7 @@
                                     <div class="product-cat">
                                         <a>Clothing</a>
                                     </div>
-                                    <h3 class="product-title"><a href="/productsingle/?id={{item.productfulldetails.productcolor.productcommon.productid}}">{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
+                                    <h3 class="product-title"><a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
                                     <div class="product-price">
                                         ${{item.productfulldetails.price}}
                                     </div><!-- End .product-price -->
@@ -345,7 +345,7 @@
                             {% if item.productfulldetails.productcolor.productcommon.productid not in stock %}
                             <div class="product product-7 text-center">
                                 <figure class="product-media">
-                                    <a href="/productsingle/?id={{item.productfulldetails.productcolor.productcommon.productid}}">
+                                    <a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">
                                         <img src="{{item.productfulldetails.productcolor.productpicture.url}}" width="277" height="377" alt="Product image" class="product-image">
                                         <img src="{{item.productfulldetails.productcolor.picture.url}}" width="277" height="377" alt="Product image" class="product-image-hover">
                                     </a>
@@ -363,7 +363,7 @@
                                     <div class="product-cat">
                                         <a>Clothing</a>
                                     </div>
-                                    <h3 class="product-title"><a href="/productsingle/?id={{item.productfulldetails.productcolor.productcommon.productid}}">{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
+                                    <h3 class="product-title"><a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
                                     <div class="product-price">
                                         ${{item.productfulldetails.price}}
                                     </div><!-- End .product-price -->
@@ -547,7 +547,7 @@
                         <div class="col-6 col-md-4 col-lg-3">
                             <div class="product product-7 text-center">
                                 <figure class="product-media">
-                                    <a href="/productsingle/?id={{item.productfulldetails.productcolor.productcommon.productid}}">
+                                    <a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">
                                         <img src="{{item.productfulldetails.productcolor.productpicture.url}}" alt="Product image" width="277" height="377" class="product-image">
                                         <img src="{{item.productfulldetails.productcolor.picture.url}}" alt="Product image" width="277" height="377" class="product-image-hover">
                                     </a>
@@ -564,7 +564,7 @@
                                     <div class="product-cat">
                                         <a >Clothing</a>
                                     </div><!-- End .product-cat -->
-                                    <h3 class="product-title"><a href="/productsingle/?id={{item.productfulldetails.productcolor.productcommon.productid}}">{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
+                                    <h3 class="product-title"><a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
                                     <div class="product-price">
                                         ${{item.productfulldetails.price}}
                                     </div><!-- End .product-price -->
@@ -587,7 +587,7 @@
                             <div class="product product-7 text-center">
                                 <figure class="product-media">
                                     <span class="product-label label-out">Out Of Stock</span>
-                                    <a href="/productsingle/?id={{item.productfulldetails.productcolor.productcommon.productid}}">
+                                    <a >
                                         <img src="{{item.productfulldetails.productcolor.productpicture.url}}" alt="Product image" width="277" height="377" class="product-image">
                                         <img src="{{item.productfulldetails.productcolor.picture.url}}" alt="Product image" width="277" height="377" class="product-image-hover">
                                     </a>

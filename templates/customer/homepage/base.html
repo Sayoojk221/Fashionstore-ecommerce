@@ -16,8 +16,8 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/static/assets/images/icons/favicon-16.png">
     <link rel="manifest" href="/static/assets/images/icons/site.html">
     <link rel="mask-icon" href="/static/assets/images/icons/safari-pinned-tab.svg" color="#666666">
-<!--     <link rel="shortcut icon" href="/static/assets/images/icons/favico.ico">
- -->    <meta name="apple-mobile-web-app-title" content="Fashionstore">
+    <link rel="shortcut icon" href="/static/assets/images/icons/favicon.png">
+    <meta name="apple-mobile-web-app-title" content="Fashionstore">
     <meta name="application-name" content="Fashionstore">
     <meta name="msapplication-TileColor" content="#cc9966">
     <meta name="msapplication-config" content="/static/assets/images/icons/browserconfig.xml">
@@ -28,13 +28,14 @@
     <link rel="stylesheet" href="/static/assets/css/plugins/owl-carousel/owl.carousel.css">
     <link rel="stylesheet" href="/static/assets/css/plugins/magnific-popup/magnific-popup.css">
     <link rel="stylesheet" href="/static/assets/css/plugins/jquery.countdown.css">
+    <link rel="stylesheet" href="/static/assets/css/plugins/nouislider/nouislider.css">
     <!-- Main CSS File -->
     <link rel="stylesheet" href="/static/assets/css/style.css">
     <link rel="stylesheet" href="/static/assets/css/skins/skin-demo-6.css">
     <link rel="stylesheet" href="/static/assets/css/demos/demo-6.css">
 </head>
 
-<body onload='uniquecode()'>
+<body>
     <div class="page-wrapper">
         <header class="header header-6">
             <div class="header-top">
@@ -42,43 +43,58 @@
                     <div class="header-left">
                         <ul class="top-menu top-link-menu d-none d-md-block">
                             <li>
-<!--                                 <a href="#">Links</a>
- -->                                <ul>
-<!--                                     <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
- -->                                </ul>
+                                <!--                                 <a href="#">Links</a>
+ -->
+                                <ul>
+                                    <!--                                     <li><a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a></li>
+ -->
+                                </ul>
                             </li>
                         </ul><!-- End .top-menu -->
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
                         <div class="social-icons social-icons-color">
-                            <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                            <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                            <a href="#" class="social-icon social-pinterest" title="Instagram" target="_blank"><i class="icon-pinterest-p"></i></a>
-                            <a href="#" class="social-icon social-instagram" title="Pinterest" target="_blank"><i class="icon-instagram"></i></a>
+                            <a href="#" class="social-icon social-facebook" title="Facebook" target="_blank"><i
+                                    class="icon-facebook-f"></i></a>
+                            <a href="#" class="social-icon social-twitter" title="Twitter" target="_blank"><i
+                                    class="icon-twitter"></i></a>
+                            <a href="#" class="social-icon social-pinterest" title="Instagram" target="_blank"><i
+                                    class="icon-pinterest-p"></i></a>
+                            <a href="#" class="social-icon social-instagram" title="Pinterest" target="_blank"><i
+                                    class="icon-instagram"></i></a>
                         </div><!-- End .soial-icons -->
                         <ul class="top-menu top-link-menu">
                             <li>
-<!--                                 <a href="#">Links</a>
- -->                                <ul>
-                                    <li><a style="font-size: 17px" href="#signin-modal" data-toggle="modal" ><i class="icon-user"></i>Login</a></li>
+                                <!--                                 <a href="#">Links</a>
+ -->                            {% if not customerexist%}
+                                <ul>
+                                    <li><a style="font-size: 17px"   id="login" href="#signin-modal" data-toggle="modal"><i
+                                                class="icon-user"></i>Login</a></li>
                                 </ul>
+                                {% else %}
+                                <ul>
+                                    <li><a style="font-size: 17px" href="/account/" ><i class="icon-user"></i>Account</a></li>
+                                </ul>
+                                {% endif %}
                             </li>
                         </ul><!-- End .top-menu -->
 
                         <div class="header-dropdown">
-<!--                             <a href="#">USD</a>
- -->                            <div class="header-menu">
+                            <!--                             <a href="#">USD</a>
+ -->
+                            <div class="header-menu">
                                 <ul>
-                                   <!--  <li><a href="#">Eur</a></li>
+                                    <!--  <li><a href="#">Eur</a></li>
                                     <li><a href="#">Usd</a></li> -->
                                 </ul>
                             </div><!-- End .header-menu -->
                         </div><!-- End .header-dropdown -->
 
                         <div class="header-dropdown">
-<!--                             <a href="#">Eng</a>
- -->                            <div class="header-menu">
+                            <!--                             <a href="#">Eng</a>
+ -->
+                            <div class="header-menu">
                                 <ul>
                                     <!-- <li><a href="#">English</a></li>
                                     <li><a href="#">French</a></li>
@@ -98,14 +114,16 @@
                                 <div class="header-search-wrapper search-wrapper-wide">
                                     <label for="q" class="sr-only">Search</label>
                                     <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                                    <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
+                                    <input type="search" class="form-control" name="q" id="q"
+                                        placeholder="Search product ..." required>
                                 </div><!-- End .header-search-wrapper -->
                             </form>
                         </div><!-- End .header-search -->
                     </div>
                     <div class="header-center">
-                        <a href="index.html" class="logo">
-                            <img src="/static/assets/images/demos/logo.png" alt="Fashionstore Logo" width="200" height="20">
+                        <a href="/" class="logo">
+                            <img src="/static/assets/images/demos/logo.png" alt="Fashionstore Logo" width="200"
+                                height="20">
                         </a>
                     </div><!-- End .header-left -->
 
@@ -115,11 +133,106 @@
                             <span class="wishlist-count">3</span>
                             <span class="wishlist-txt">My Wishlist</span> -->
                         </a>
+                        {% if procount > 0 %}
+                        <div class="dropdown cart-dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" data-display="static">
+                                <i class="icon-shopping-cart"></i>
+                                <span class="cart-count">{{procount}}</span>
+                                <span id='side-price' class="cart-txt">${{totalprice}}</span>
+                            </a>
 
-                        <div id='sidecart' class="dropdown cart-dropdown">
+                            <div class="dropdown-menu dropdown-menu-right">
+                                {% for pro in cart%}
+                                <div id='{{pro.productid.id}}' class="dropdown-cart-products cart">
+                                    <div class="product">
+                                        <div class="product-cart-details">
+                                            <h4 class="product-title">
+                                                <a
+                                                    href="/productsingle/?id2={{pro.productid.productcolor.colorid}}">{{pro.productid.productcolor.productcommon.title}}</a>
+                                            </h4>
+                                            <span class="cart-product-info">
+                                                <span class="cart-product-qty"></span>
+                                                {{pro.productid.size}}
+                                            </span>
+                                            <br>
+                                            <span class="cart-product-info">
+                                                <span class="cart-product-qty"></span>
+                                                $ {{pro.productid.price}}
+                                            </span>
+                                        </div><!-- End .product-cart-details -->
 
+                                        <figure class="product-image-container">
+                                            <a href="/productsingle/?id2={{pro.productid.productcolor.colorid}}"
+                                                class="product-image">
+                                                <img src="{{pro.productid.productcolor.picture.url}}" alt="product">
+                                            </a>
+                                        </figure>
+                                        <!--                                         <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+ -->
+                                    </div><!-- End .product -->
+                                </div><!-- End .cart-product -->
+                                {% endfor %}
+                                <div class="dropdown-cart-total">
+                                    <span>Total</span>
 
+                                    <span id='side-price2' class="cart-total-price">${{totalprice}}</span>
+                                </div><!-- End .dropdown-cart-total -->
+
+                                <div class="dropdown-cart-action">
+                                    <a></a>
+                                    <a href="/shoppingcart/" class="btn btn-outline-primary-2"><span>View Cart</span><i
+                                            class="icon-long-arrow-right"></i></a>
+                                </div><!-- End .dropdown-cart-total -->
+                            </div><!-- End .dropdown-menu -->
                         </div><!-- End .cart-dropdown -->
+                        {% else %}
+                        <div class="dropdown cart-dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false" data-display="static">
+                                <i class="icon-shopping-cart"></i>
+                                <span class="cart-count">0</span>
+                                <span class="cart-txt"></span>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-cart-products">
+                                    <div class="product">
+                                        <div class="product-cart-details">
+                                            <h4 class="product-title">
+                                                <a href="#"></a>
+                                            </h4>
+
+                                            <span class="cart-product-info">
+                                                <span class="cart-product-qty"></span>
+
+                                            </span>
+                                        </div><!-- End .product-cart-details -->
+
+                                        <figure class="product-image-container">
+                                            <!-- <a href="product.html" class="product-image">
+                                                <img src="assets/images/products/cart/product-1.jpg" alt="product">
+                                            </a> -->
+                                        </figure>
+                                        <!--                                         <a href="#" class="btn-remove" title="Remove Product"><i class="icon-close"></i></a>
+ -->
+                                    </div><!-- End .product -->
+                                </div><!-- End .cart-product -->
+
+                                <div class="dropdown-cart-total">
+                                    <span>Total</span>
+
+                                    <span class="cart-total-price">$0</span>
+                                </div><!-- End .dropdown-cart-total -->
+
+                                <div class="dropdown-cart-action">
+                                    <a></a>
+                                    <a href="/shoppingcart/" class="btn btn-outline-primary-2"><span>View Cart</span><i
+                                            class="icon-long-arrow-right"></i></a>
+                                </div><!-- End .dropdown-cart-total -->
+                            </div><!-- End .dropdown-menu -->
+                        </div><!-- End .cart-dropdown -->
+                        {% endif %}
                     </div>
                 </div><!-- End .container -->
             </div><!-- End .header-middle -->
@@ -130,15 +243,15 @@
                         <nav class="main-nav">
                             <ul class="menu ">
                                 <li class="megamenu-container">
-                                    <a href="/"  class="sf">Home</a>
+                                    <a href="/" class="sf">Home</a>
                                 <li>
-                                    <a href="#"  class="sf">Shop</a>
+                                    <a href="/category/" class="sf">Shop</a>
                                 </li>
                                 <!-- <li>
                                     <a href="#" class="sf">Product</a>
                                 </li> -->
                                 <li>
-                                    <a href="#"  class="sf">Blog</a>
+                                    <a href="#" class="sf">Blog</a>
                                 </li>
                             </ul><!-- End .menu -->
                         </nav><!-- End .main-nav -->
@@ -150,27 +263,33 @@
                     </div><!-- End .header-left -->
 
                     <div class="header-right">
-<!--                         <i class="la la-lightbulb-o"></i><p>Clearance Up to 30% Off</span></p>
- -->                    </div>
+                        <!--                         <i class="la la-lightbulb-o"></i><p>Clearance Up to 30% Off</span></p>
+ -->
+                    </div>
                 </div><!-- End .container -->
             </div><!-- End .header-bottom -->
         </header><!-- End .header -->
         {% block content %}
         {% endblock %}
-         <footer class="footer">
+        <footer class="footer">
             <div class="footer-middle">
                 <div class="container">
                     <div class="row">
                         <div class="col-sm-6 col-lg-3">
                             <div class="widget widget-about">
                                 <h4 class="widget-title">about Fashion store</h4><!-- End .widget-title -->
-                                <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
+                                <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate
+                                    magna eros eu erat. </p>
 
                                 <div class="social-icons">
-                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i class="icon-facebook-f"></i></a>
-                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i class="icon-twitter"></i></a>
-                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i class="icon-instagram"></i></a>
-                                    <a href="#" class="social-icon" title="Youtube" target="_blank"><i class="icon-youtube"></i></a>
+                                    <a href="#" class="social-icon" title="Facebook" target="_blank"><i
+                                            class="icon-facebook-f"></i></a>
+                                    <a href="#" class="social-icon" title="Twitter" target="_blank"><i
+                                            class="icon-twitter"></i></a>
+                                    <a href="#" class="social-icon" title="Instagram" target="_blank"><i
+                                            class="icon-instagram"></i></a>
+                                    <a href="#" class="social-icon" title="Youtube" target="_blank"><i
+                                            class="icon-youtube"></i></a>
                                 </div><!-- End .soial-icons -->
                             </div><!-- End .widget about-widget -->
                         </div><!-- End .col-sm-6 col-lg-3 -->
@@ -202,6 +321,21 @@
                                 </ul><!-- End .widget-list -->
                             </div><!-- End .widget -->
                         </div><!-- End .col-sm-6 col-lg-3 -->
+                        {% if customerexist%}
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="widget">
+                                <h4 class="widget-title">My Account</h4><!-- End .widget-title -->
+
+                                <ul class="widget-list">
+                                    <li><a href="/account/">Dashboard</a></li>
+                                    <li><a href="/account/">Account Details</a></li>
+                                    <li><a href="/account/">Orders</a></li>
+                                    <li><a href="/account/">Address</a></li>
+                                    <li><a href="/logout/">Sign Out</a></li>
+                                </ul><!-- End .widget-list -->
+                            </div><!-- End .widget -->
+                        </div>
+                        {% endif %}
                     </div><!-- End .row -->
                 </div><!-- End .container -->
             </div><!-- End .footer-middle -->
@@ -211,8 +345,10 @@
                     <figure class="footer-payments">
                         <img src="/static/assets/images/payments.png" alt="Payment methods" width="272" height="20">
                     </figure><!-- End .footer-payments -->
-                    <img src="/static/assets/images/demos/logo-footer.png" alt="Fashionstore Logo" width="200" height="20">
-                    <p class="footer-copyright">Copyright © 2020 Fashionstore Store. All Rights Reserved.</p><!-- End .footer-copyright -->
+                    <img src="/static/assets/images/demos/logo-footer.png" alt="Fashionstore Logo" width="200"
+                        height="20">
+                    <p class="footer-copyright">Copyright © 2020 Fashionstore Store. All Rights Reserved.</p>
+                    <!-- End .footer-copyright -->
                 </div><!-- End .container -->
             </div><!-- End .footer-bottom -->
         </footer><!-- End .footer -->
@@ -228,7 +364,8 @@
 
             <form action="#" method="get" class="mobile-search">
                 <label for="mobile-search" class="sr-only">Search</label>
-                <input type="search" class="form-control" name="mobile-search" id="mobile-search" placeholder="Search in..." required>
+                <input type="search" class="form-control" name="mobile-search" id="mobile-search"
+                    placeholder="Search in..." required>
                 <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
             </form>
 
@@ -240,7 +377,7 @@
 
                     </li>
                     <li>
-                        <a href="#">Shop</a>
+                        <a href="/category/">Shop</a>
 
                     </li>
                     <!-- <li>
@@ -273,39 +410,47 @@
                     </button>
 
                     <div class="form-box">
-                        <label style="text-align: center; color: red; font-size: 16px" id='error' ></label>
+                        <label style="text-align: center; color: red; font-size: 16px" id='error'></label>
                         <div class="form-tab">
                             <ul class="nav nav-pills nav-fill" role="tablist">
                                 <li class="nav-item">
-                                    <a style="font-size: 18px" class="nav-link active" id="signin-tab-2" data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2" aria-selected="True">Sign In</a>
+                                    <a style="font-size: 18px" class="nav-link active" id="signin-tab-2"
+                                        data-toggle="tab" href="#signin-2" role="tab" aria-controls="signin-2"
+                                        aria-selected="True">Sign In</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a style="font-size: 18px" class="nav-link " id="register-tab-2" data-toggle="tab" href="#register-2" role="tab" aria-controls="register-2" >Register</a>
+                                    <a style="font-size: 18px" class="nav-link " id="register-tab-2" data-toggle="tab"
+                                        href="#register-2" role="tab" aria-controls="register-2">Register</a>
                                 </li>
                             </ul>
                             <div class="tab-content">
-                                <div class="tab-pane fade show active" id="signin-2" role="tabpanel" aria-labelledby="signin-tab-2">
+                                <div class="tab-pane fade show active" id="signin-2" role="tabpanel"
+                                    aria-labelledby="signin-tab-2">
                                     <form action="/login/" method="POST">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <label for="singin-email-2">email address *</label>
-                                            <input type="text" class="form-control log" id="email-log" name="emailid" required>
+                                            <input type="text" class="form-control log" id="email-log" name="emailid"
+                                                required>
                                         </div><!-- End .form-group -->
 
                                         <div class="form-group">
                                             <label for="singin-password-2">Password *</label>
-                                            <input type="password" class="form-control log" id="pass-log" name="password" required>
+                                            <input type="password" class="form-control log" id="pass-log"
+                                                name="password" required>
                                         </div><!-- End .form-group -->
-
+                                        <input type="hidden" name="url" value="{{request.get_full_path}}">
                                         <div class="form-footer">
-                                            <button  id='submit-log' type="submit" class="btn btn-outline-primary-2">
+                                            <button id='submit-log' type="submit" class="btn btn-outline-primary-2">
                                                 <span>LOG IN</span>
                                                 <i class="icon-long-arrow-right"></i>
                                             </button>
 
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="signin-remember-2">
-                                                <label class="custom-control-label" for="signin-remember-2">Remember Me</label>
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="signin-remember-2">
+                                                <label class="custom-control-label" for="signin-remember-2">Remember
+                                                    Me</label>
                                             </div><!-- End .custom-checkbox -->
 
                                             <a href="#" class="forgot-link">Forgot Your Password?</a>
@@ -329,31 +474,37 @@
                                         </div>
                                     </div> -->
                                 </div>
-                                <div class="tab-pane fade " id="register-2" role="tabpanel" aria-labelledby="register-tab-2">
+                                <div class="tab-pane fade " id="register-2" role="tabpanel"
+                                    aria-labelledby="register-tab-2">
                                     <form action="/register/" method='POST'>
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <label for="register-email-2">Your email address *</label>
-                                            <input type="email" class="form-control reg" id="email-reg" name="email" required>
+                                            <input type="email" class="form-control reg" id="email-reg" name="email"
+                                                required>
                                         </div><!-- End .form-group -->
+                                        <input type="hidden" name="url" value="{{request.get_full_path}}">
                                         <div class="form-group">
                                             <label for="register-email-2">Phone Number *</label>
-                                            <input type="text" class="form-control reg" id="phone-reg" name="phone" required>
+                                            <input type="text" class="form-control reg" id="phone-reg" name="phone"
+                                                required>
                                         </div>
                                         <div class="form-group">
                                             <label for="register-password-2">Password *</label>
-                                            <input  type="password" class="form-control" id="pass" name="pass" required>
+                                            <input type="password" class="form-control" id="pass" name="pass" title="Password must contain at least 6 characters, including UPPER/lowercase and numbers" type="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"  onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.confirm.pattern = RegExp.escape(this.value);" >
                                         </div><!-- End .form-group -->
 
                                         <div class="form-footer">
-                                            <button id='submit-reg'  type="submit" class="btn btn-outline-primary-2">
+                                            <button id='submit-reg' type="submit" class="btn btn-outline-primary-2">
                                                 <span>SIGN UP</span>
                                                 <i class="icon-long-arrow-right"></i>
                                             </button>
 
                                             <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
-                                                <label class="custom-control-label" for="register-policy-2">I agree to the <a href="#">privacy policy</a> *</label>
+                                                <input type="checkbox" class="custom-control-input"
+                                                    id="register-policy-2" required>
+                                                <label class="custom-control-label" for="register-policy-2">I agree to
+                                                    the <a href="#">privacy policy</a> *</label>
                                             </div><!-- End .custom-checkbox -->
                                         </div><!-- End .form-footer -->
                                     </form>
@@ -383,17 +534,22 @@
     </div><!-- End .modal -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/static/assets/js/jquery.min.js"></script>
-    <script src='/static/assets/js/uniquecode.js'></script>
+    <script src='/static/assets/js/filter.js'></script>
     <script src='/static/assets/js/emailpasswordcheck.js'></script>
+    <script src='/static/assets/js/shoppingcart.js'></script>
+    <script src='/static/assets/js/logincheck.js'></script>
     <script src="/static/assets/js/bootstrap.bundle.min.js"></script>
     <script src="/static/assets/js/jquery.hoverIntent.min.js"></script>
     <script src="/static/assets/js/jquery.waypoints.min.js"></script>
     <script src="/static/assets/js/superfish.min.js"></script>
     <script src="/static/assets/js/owl.carousel.min.js"></script>
+    <script src="/static/assets/js/wNumb.js"></script>
     <script src="/static/assets/js/bootstrap-input-spinner.js"></script>
     <script src="/static/assets/js/jquery.plugin.min.js"></script>
     <script src="/static/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="/static/assets/js/nouislider.min.js"></script>
     <script src="/static/assets/js/jquery.countdown.min.js"></script>
+
     <!-- Main JS File -->
     <script src="/static/assets/js/main.js"></script>
     <script src="/static/assets/js/demos/demo-6.js"></script>
@@ -401,4 +557,5 @@
 
 
 <!-- molla/index-6.html  22 Nov 2019 09:56:39 GMT -->
+
 </html>

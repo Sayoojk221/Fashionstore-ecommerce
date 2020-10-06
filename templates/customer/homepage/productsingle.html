@@ -94,7 +94,7 @@
                                         <label for="size">Size:</label>
                                         <div class="select-custom">
                                             <select name="size" id='size'  class="form-control"  >
-                                                <option value="" >Select a size</option>
+                                                <option  value="">Select a size </option>
                                                 {% for j in size %}
                                                 {% if j.productcolor.colorid == item.productcolor.colorid %}
                                                 <option  value="{{j.id}}">{{j.size}}</option>
@@ -115,7 +115,7 @@
                                     <br>
                                     <div class="product-details-action">
 
-                                        <button  style="border-style: none" onclick="addcart()" class="btn-product btn-cart"><span>add to cart</span></button>
+                                        <button  style="border-style: none" onclick="addcart()"  class="btn-product btn-cart"><span id='cartclick'>add to cart</span></button>
 
                                         <div class="details-action-wrapper">
                                             <button style="border-style: none"  class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></button>
@@ -126,9 +126,9 @@
                                     <div class="product-details-footer">
                                         <div class="product-cat">
                                             <span>Category:</span>
-                                            <a href="#">Women</a>,
-                                            <a href="#">Dresses</a>,
-                                            <a href="#">Yellow</a>
+                                            <a href="/filter/{{item.productcolor.productcommon.category}}&/all/all/all/,0,750/">{{item.productcolor.productcommon.category}}</a>,
+                                            <a href="/filter/all/{{item.productcolor.productcommon.gender}}&/all/all/,0,750/">{{item.productcolor.productcommon.gender}}</a>,
+                                            <a href="/filter/all/all/all/{{item.productcolor.productcommon.brand}}&/,0,750/">{{item.productcolor.productcommon.brand}}</a>
                                         </div><!-- End .product-cat -->
 
                                         <div class="social-icons social-icons-sm">
@@ -156,7 +156,7 @@
                                 <a class="nav-link" id="product-shipping-link" data-toggle="tab" href="#product-shipping-tab" role="tab" aria-controls="product-shipping-tab" aria-selected="false">Shipping & Returns</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews (2)</a>
+                                <a class="nav-link" id="product-review-link" data-toggle="tab" href="#product-review-tab" role="tab" aria-controls="product-review-tab" aria-selected="false">Reviews ({{totalreviewcount}})</a>
                             </li>
                         </ul>
                         <div class="tab-content">
@@ -176,6 +176,7 @@
                             <div class="tab-pane fade" id="product-info-tab" role="tabpanel" aria-labelledby="product-info-link">
                                 <div class="product-desc-content">
                                     <h3>Information</h3>
+
                                     <p>{{item.productcolor.productcommon.stylenote}}</p>
                                     <!-- <h3>Fabric & care</h3>
                                     <ul>
@@ -199,58 +200,34 @@
                             </div><!-- .End .tab-pane -->
                             <div class="tab-pane fade" id="product-review-tab" role="tabpanel" aria-labelledby="product-review-link">
                                 <div class="reviews">
-                                    <h3>Reviews (2)</h3>
+
+                                    <h3 style="position: relative; right: -2px"><a onclick="login()" id="review" href="#review-modal" data-toggle="modal">Rate Product</a>
+                                    <h3></h3>
+                                    {% for j in totalreview%}
                                     <div class="review">
                                         <div class="row no-gutters">
                                             <div class="col-auto">
-                                                <h4><a href="#">Samanta J.</a></h4>
+                                                <h4><a >{{j.customerid.fname}}</a></h4>
                                                 <div class="ratings-container">
                                                     <div class="ratings">
-                                                        <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
+                                                        <div class="ratings-val" style="width: {{j.starpercent}}%;"></div><!-- End .ratings-val -->
                                                     </div><!-- End .ratings -->
                                                 </div><!-- End .rating-container -->
-                                                <span class="review-date">6 days ago</span>
+                                                <span class="review-date">{{j.createdtime|date:'d-m-m'}}</span>
                                             </div><!-- End .col -->
                                             <div class="col">
-                                                <h4>Good, perfect size</h4>
-
                                                 <div class="review-content">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus cum dolores assumenda asperiores facilis porro reprehenderit animi culpa atque blanditiis commodi perspiciatis doloremque, possimus, explicabo, autem fugit beatae quae voluptas!</p>
+                                                    <p>{{j.review}}</p>
                                                 </div><!-- End .review-content -->
 
-                                                <div class="review-action">
-                                                    <a href="#"><i class="icon-thumbs-up"></i>Helpful (2)</a>
-                                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
+                                                <div  class="review-action">
+                                                    <a href="#" style="color:#c96;box-shadow:0 1px 0 #c96"><i class="icon-thumbs-up"></i>Like</a>
+                                                    <a href="#"><i class="icon-thumbs-down"></i>Delike</a>
                                                 </div><!-- End .review-action -->
                                             </div><!-- End .col-auto -->
                                         </div><!-- End .row -->
                                     </div><!-- End .review -->
-
-                                    <div class="review">
-                                        <div class="row no-gutters">
-                                            <div class="col-auto">
-                                                <h4><a href="#">John Doe</a></h4>
-                                                <div class="ratings-container">
-                                                    <div class="ratings">
-                                                        <div class="ratings-val" style="width: 100%;"></div><!-- End .ratings-val -->
-                                                    </div><!-- End .ratings -->
-                                                </div><!-- End .rating-container -->
-                                                <span class="review-date">5 days ago</span>
-                                            </div><!-- End .col -->
-                                            <div class="col">
-                                                <h4>Very good</h4>
-
-                                                <div class="review-content">
-                                                    <p>Sed, molestias, tempore? Ex dolor esse iure hic veniam laborum blanditiis laudantium iste amet. Cum non voluptate eos enim, ab cumque nam, modi, quas iure illum repellendus, blanditiis perspiciatis beatae!</p>
-                                                </div><!-- End .review-content -->
-
-                                                <div class="review-action">
-                                                    <a href="#"><i class="icon-thumbs-up"></i>Helpful (0)</a>
-                                                    <a href="#"><i class="icon-thumbs-down"></i>Unhelpful (0)</a>
-                                                </div><!-- End .review-action -->
-                                            </div><!-- End .col-auto -->
-                                        </div><!-- End .row -->
-                                    </div><!-- End .review -->
+                                    {% endfor %}
                                 </div><!-- End .reviews -->
                             </div><!-- .End .tab-pane -->
                         </div><!-- End .tab-content -->
@@ -284,17 +261,20 @@
                                 }
                             }
                         }'>
+                        {% for item in otherproduct %}
+                        {% if item.productfulldetails.productcolor.productcommon.productid not in stock %}
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <span class="product-label label-new">New</span>
-                                <a href="product.html">
-                                    <img src="/static/assets/images/products/product-4.jpg" alt="Product image" class="product-image">
+                                <a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">
+                                    <img src="{{item.productfulldetails.productcolor.productpicture.url}}" alt="Product image" width="277" height="377" class="product-image">
+                                    <img src="{{item.productfulldetails.productcolor.picture.url}}" alt="Product image" width="277" height="377" class="product-image-hover">
                                 </a>
 
                                 <div class="product-action-vertical">
                                     <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                    <!-- <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a> -->
                                 </div><!-- End .product-action-vertical -->
 
                                 <div class="product-action">
@@ -304,11 +284,11 @@
 
                             <div class="product-body">
                                 <div class="product-cat">
-                                    <a href="#">Women</a>
+                                    <a style="font-size: 17px">{{item.productfulldetails.productcolor.productcommon.gender}}</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">Brown paperbag waist <br>pencil skirt</a></h3><!-- End .product-title -->
+                                <h3 class="product-title"><a href="/productsingle/?id2={{item.productfulldetails.productcolor.colorid}}">{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
                                 <div class="product-price">
-                                    $60.00
+                                    ${{item.productfulldetails.price}}
                                 </div><!-- End .product-price -->
                                 <div class="ratings-container">
                                     <div class="ratings">
@@ -318,31 +298,31 @@
                                 </div><!-- End .rating-container -->
 
                                 <div class="product-nav product-nav-thumbs">
-                                    <a href="#" class="active">
-                                        <img src="/static/assets/images/products/product-4-thumb.jpg" alt="product desc">
+                                    {% for i in color %}
+                                    {% if i.id in colorsize %}
+                                    {% if i.productcommon.productid == item.productfulldetails.productcolor.productcommon.productid %}
+                                    <a href="/productsingle/?id2={{i.colorid}}" class="active">
+                                        <img src="{{i.productpicture.url}}" alt="product desc">
                                     </a>
-                                    <a href="#">
-                                        <img src="/static/assets/images/products/product-4-2-thumb.jpg" alt="product desc">
-                                    </a>
-
-                                    <a href="#">
-                                        <img src="/static/assets/images/products/product-4-3-thumb.jpg" alt="product desc">
-                                    </a>
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
                                 </div><!-- End .product-nav -->
                             </div><!-- End .product-body -->
                         </div><!-- End .product -->
-
+                        {% else %}
                         <div class="product product-7 text-center">
                             <figure class="product-media">
                                 <span class="product-label label-out">Out of Stock</span>
-                                <a href="product.html">
-                                    <img src="/static/assets/images/products/product-6.jpg" alt="Product image" class="product-image">
+                                <a >
+                                    <img src="{{item.productfulldetails.productcolor.productpicture.url}}" width="277" height="377" alt="Product image" class="product-image">
+                                    <img src="{{item.productfulldetails.productcolor.picture.url}}" width="277" height="377" alt="Product image" class="product-image-hover">
                                 </a>
 
                                 <div class="product-action-vertical">
                                     <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
+                                    <!-- <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
+                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a> -->
                                 </div><!-- End .product-action-vertical -->
 
                                 <div class="product-action">
@@ -352,139 +332,130 @@
 
                             <div class="product-body">
                                 <div class="product-cat">
-                                    <a href="#">Jackets</a>
+                                    <a style="font-size: 17px">{{item.productfulldetails.productcolor.productcommon.gender}}</a>
                                 </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">Khaki utility boiler jumpsuit</a></h3><!-- End .product-title -->
+                                <h3 class="product-title"><a >{{item.productfulldetails.productcolor.productcommon.title}}</a></h3><!-- End .product-title -->
                                 <div class="product-price">
-                                    <span class="out-price">$120.00</span>
+                                    ${{item.productfulldetails.price}}
                                 </div><!-- End .product-price -->
                                 <div class="ratings-container">
                                     <div class="ratings">
                                         <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
                                     </div><!-- End .ratings -->
                                     <span class="ratings-text">( 6 Reviews )</span>
-                                </div><!-- End .rating-container -->
-                            </div><!-- End .product-body -->
-                        </div><!-- End .product -->
-
-                        <div class="product product-7 text-center">
-                            <figure class="product-media">
-                                <span class="product-label label-top">Top</span>
-                                <a href="product.html">
-                                    <img src="/static/assets/images/products/product-11.jpg" alt="Product image" class="product-image">
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                                </div><!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                </div><!-- End .product-action -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Shoes</a>
-                                </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">Light brown studded Wide fit wedges</a></h3><!-- End .product-title -->
-                                <div class="product-price">
-                                    $110.00
-                                </div><!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 80%;"></div><!-- End .ratings-val -->
-                                    </div><!-- End .ratings -->
-                                    <span class="ratings-text">( 1 Reviews )</span>
-                                </div><!-- End .rating-container -->
-
+                                </div>
                                 <div class="product-nav product-nav-thumbs">
-                                    <a href="#" class="active">
-                                        <img src="/static/assets/images/products/product-11-thumb.jpg" alt="product desc">
+                                    {% for i in color %}
+                                    {% if i.id in colorsize %}
+                                    {% if i.productcommon.productid == item.productfulldetails.productcolor.productcommon.productid %}
+                                    <a href="/productsingle/?id2={{i.colorid}}" class="active">
+                                        <img src="{{i.productpicture.url}}" alt="product desc">
                                     </a>
-                                    <a href="#">
-                                        <img src="/static/assets/images/products/product-11-2-thumb.jpg" alt="product desc">
-                                    </a>
-
-                                    <a href="#">
-                                        <img src="/static/assets/images/products/product-11-3-thumb.jpg" alt="product desc">
-                                    </a>
-                                </div><!-- End .product-nav -->
+                                    {% endif %}
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
                             </div><!-- End .product-body -->
                         </div><!-- End .product -->
-
-                        <div class="product product-7 text-center">
-                            <figure class="product-media">
-                                <a href="product.html">
-                                    <img src="/static/assets/images/products/product-10.jpg" alt="Product image" class="product-image">
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                                </div><!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                </div><!-- End .product-action -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Jumpers</a>
-                                </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">Yellow button front tea top</a></h3><!-- End .product-title -->
-                                <div class="product-price">
-                                    $56.00
-                                </div><!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 0%;"></div><!-- End .ratings-val -->
-                                    </div><!-- End .ratings -->
-                                    <span class="ratings-text">( 0 Reviews )</span>
-                                </div><!-- End .rating-container -->
-                            </div><!-- End .product-body -->
-                        </div><!-- End .product -->
-
-                        <div class="product product-7 text-center">
-                            <figure class="product-media">
-                                <a href="product.html">
-                                    <img src="/static/assets/images/products/product-7.jpg" alt="Product image" class="product-image">
-                                </a>
-
-                                <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-wishlist btn-expandable"><span>add to wishlist</span></a>
-                                    <a href="popup/quickView.html" class="btn-product-icon btn-quickview" title="Quick view"><span>Quick view</span></a>
-                                    <a href="#" class="btn-product-icon btn-compare" title="Compare"><span>Compare</span></a>
-                                </div><!-- End .product-action-vertical -->
-
-                                <div class="product-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
-                                </div><!-- End .product-action -->
-                            </figure><!-- End .product-media -->
-
-                            <div class="product-body">
-                                <div class="product-cat">
-                                    <a href="#">Jeans</a>
-                                </div><!-- End .product-cat -->
-                                <h3 class="product-title"><a href="product.html">Blue utility pinafore denim dress</a></h3><!-- End .product-title -->
-                                <div class="product-price">
-                                    $76.00
-                                </div><!-- End .product-price -->
-                                <div class="ratings-container">
-                                    <div class="ratings">
-                                        <div class="ratings-val" style="width: 20%;"></div><!-- End .ratings-val -->
-                                    </div><!-- End .ratings -->
-                                    <span class="ratings-text">( 2 Reviews )</span>
-                                </div><!-- End .rating-container -->
-                            </div><!-- End .product-body -->
-                        </div><!-- End .product -->
+                        {% endif %}
+                        {% endfor %}
                     </div><!-- End .owl-carousel -->
                 </div><!-- End .container -->
             </div><!-- End .page-content -->
+            <div class="modal fade" id="review-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"><i class="icon-close"></i></span>
+                            </button>
+
+                            <div class="form-box">
+                                <div class="form-tab">
+                                    <ul class="nav nav-pills nav-fill" role="tablist">
+                                        <li class="nav-item">
+                                            <a style="font-size: 18px" class="nav-link active" id="review-tab"
+                                                data-toggle="tab" href="#review" role="tab" aria-controls="signin-2"
+                                                aria-selected="True">Post Review</a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="review" role="tabpanel"
+                                            aria-labelledby="review-tab">
+                                            <form action="/productreview/" method="POST">
+                                                {% csrf_token %}
+                                                {% if review %}
+                                                {% for r in review %}
+                                                <div class="form-group">
+                                                    <label for="House">Review *</label>
+                                                    <textarea class="form-control" name='review'  required>{{r.review}}</textarea>
+                                                </div>
+                                                <input type="hidden" name="url" value="{{request.get_full_path}}">
+                                                <input type="hidden" name="reviewid" value='{{r.id}}'>
+                                                <input type="hidden" name="proid" value='{{item.productcolor.id}}'>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label>Rate *</label>
+                                                            <div class="select-custom">
+                                                            <select name="star"  class="form-control" required  >
+                                                                {% if r.starpercent == 20 %}
+                                                                <option  value="20">Horrible</option>
+                                                                {% elif r.starpercent == 40 %}
+                                                                <option  value="40">Bad</option>
+                                                                {% elif r.starpercent == 60 %}
+                                                                <option  value="60">Average</option>
+                                                                {% elif r.starpercent == 80 %}
+                                                                <option  selected value="80">Good</option>
+                                                                {% elif r.starpercent == 100 %}
+                                                                <option  value="100">Excellent</option>
+                                                                {% endif %}
+                                                                <option  value="20">Horrible</option>
+                                                                <option  value="40">Bad</option>
+                                                                <option  value="60">Average</option>
+                                                                <option  value='80'>Good</option>
+                                                                <option  value="100">Excellent</option>
+                                                            </select>
+                                                        </div>
+                                                    </div><!-- End .col-sm-6 -->
+                                                </div>
+                                                {% endfor %}
+                                                {% else %}
+                                                <div class="form-group">
+                                                    <label for="House">Review *</label>
+                                                    <textarea class="form-control" name='review' required></textarea>
+                                                </div>
+                                                <input type="hidden" name="url" value="{{request.get_full_path}}">
+                                                <input type="hidden" name="proid" value='{{item.productcolor.id}}'>
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label>Rate *</label>
+                                                            <div class="select-custom">
+                                                            <select name="star"  class="form-control" required  >
+                                                                <option  value="20">Horrible</option>
+                                                                <option  value="40">Bad</option>
+                                                                <option  value="60">Average</option>
+                                                                <option  selected value="80">Good</option>
+                                                                <option  value="100">Excellent</option>
+                                                            </select>
+                                                        </div>
+                                                    </div><!-- End .col-sm-6 -->
+                                                </div>
+                                                {% endif %}
+                                                <div class="form-footer">
+                                                    <button  type="submit" class="btn btn-outline-primary-2">
+                                                        <span>Submit</span>
+                                                        <i class="icon-long-arrow-right"></i>
+                                                    </button>
+                                                </div><!-- End .form-footer -->
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
         </main><!-- End .main -->
 {% endblock %}
