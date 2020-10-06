@@ -2,6 +2,7 @@ from django.db import models
 from adminpanel.models import *
 from django.utils import timezone
 
+
 class register(models.Model):
     email = models.CharField(max_length=200,default='')
     phoneno = models.CharField(max_length=20,default='')
@@ -58,3 +59,4 @@ class ProductReviewLikes(models.Model):
     productreview = models.ForeignKey(ProductReview,on_delete=models.CASCADE)
     customerid = models.ForeignKey(register,on_delete=models.CASCADE)
     likestatus = models.CharField(max_length=50,default='')
+

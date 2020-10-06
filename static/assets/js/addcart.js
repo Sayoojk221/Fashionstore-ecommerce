@@ -1,3 +1,4 @@
+
 function addcart() {
     var sizeid = $('#size').val()
     if (sizeid > 0){
@@ -55,3 +56,4 @@ function sidecart() {
         }
     })
 }
+

@@ -25,5 +25,4 @@ urlpatterns = [
     path('filter/<cat>/<gen>/<siz>/<bra>/<pri>/',views.filter),
     path('productreview/',views.productreview),
 
-
 ]

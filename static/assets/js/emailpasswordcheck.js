@@ -45,6 +45,7 @@ $(document).ready(function(){
             }
         });
     })
+
     $('#oldpass').on('change',function(){
         var pass = $(this).val()
         $.ajax({
@@ -62,7 +63,5 @@ $(document).ready(function(){
             }
         })
     })
-
-
 
 })

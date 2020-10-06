@@ -94,7 +94,9 @@
                                         <label for="size">Size:</label>
                                         <div class="select-custom">
                                             <select name="size" id='size'  class="form-control"  >
+
                                                 <option  value="">Select a size </option>
+
                                                 {% for j in size %}
                                                 {% if j.productcolor.colorid == item.productcolor.colorid %}
                                                 <option  value="{{j.id}}">{{j.size}}</option>
@@ -115,7 +117,9 @@
                                     <br>
                                     <div class="product-details-action">
 
+
                                         <button  style="border-style: none" onclick="addcart()"  class="btn-product btn-cart"><span id='cartclick'>add to cart</span></button>
+
 
                                         <div class="details-action-wrapper">
                                             <button style="border-style: none"  class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></button>

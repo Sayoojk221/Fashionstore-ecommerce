@@ -11,6 +11,7 @@ import random
 import datetime
 from django.db.models import Q
 
+
 def outofstock():
     value = ProductSize.objects.filter(quantity__lte=0).values_list(
         'productcolor__productcommon__productid')
@@ -89,7 +90,6 @@ def emailpassword(request):
     phone = request.GET.get('phone')
     email_details = register.objects.filter(email=emailid)
     phone_details = register.objects.filter(phoneno=phone)
-
     email_data = "Email Already exist" if email_details else False
 
     phone_data = 'Phone Number already exist' if phone_details else False
@@ -498,6 +498,3 @@ def productreview(request):
             reviewid = request.POST['reviewid']
             ProductReview.objects.filter(id=reviewid).update(review=review,starpercent=star)
             return redirect(url)
-
-
-
